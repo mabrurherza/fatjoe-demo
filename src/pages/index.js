@@ -1,10 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
-import Rive from "@rive-app/react-canvas";
-
-const inter = Inter({ subsets: ["latin"] });
-
+import Rive, { Layout, Fit, Alignment } from "@rive-app/react-canvas";
 export default function Home() {
   return (
     <>
@@ -14,14 +10,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
           rel="stylesheet"
         ></link>
       </Head>
       <main className="overflow-hidden">
-        <nav className="bg-white w-full grid place-items-center">
+        <nav className="bg-white w-full grid place-items-center px-5">
           <div className="max-w-7xl w-full py-4 flex justify-between items-center">
             <div>
               <svg
@@ -37,7 +37,7 @@ export default function Home() {
                 ></path>
               </svg>
             </div>
-            <ul className="font-poppins flex gap-12">
+            <ul className="font-poppins flex gap-4 text-sm md:text-lg md:gap-12">
               <li>Services</li>
               <li>Tools</li>
               <li>Academy</li>
@@ -45,17 +45,19 @@ export default function Home() {
           </div>
         </nav>
 
-        <section className="w-full bg-[#15141A] h-[820px] grid place-items-center">
-          <div className="flex max-w-7xl w-full">
-            <div className="flex-1">
-              <h1 className="font-bold font-poppins text-[42px] text-white leading-normal">
+        <section className="w-full bg-[#15141A] grid place-items-center">
+          <div className="flex flex-col md:flex-row-reverse md:max-w-7xl md:w-full md:my-32">
+            <div className=" md:flex-1">
+              <Rive
+                src="/fatjoe-demo-3.riv"
+                className=" w-full h-[420px] md:h-full md:scale-150"
+              />
+            </div>
+            <div className=" px-5 md:flex-1">
+              <h1 className="font-bold font-poppins text-[34px] md:text-[42px] text-white leading-tight">
                 The #1 Blogger Outreach <br /> Service for SEOs & Agencies.
               </h1>
               <img src="/left.png" className="w-[500px] mt-10" />
-            </div>
-            <div className="flex-1 w-full scale-150">
-              {/* <img src="/hero-img.png" className="w-full scale-[2]" /> */}
-              <Rive src="/fatjoe-demo.riv" />
             </div>
           </div>
         </section>
