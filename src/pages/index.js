@@ -49,11 +49,11 @@ export default function Home() {
           <div className="flex flex-col md:flex-row-reverse md:max-w-7xl md:w-full md:my-32">
             <div className=" md:flex-1">
               <Rive
-                src="/fatjoe-demo-3.riv"
-                className=" w-full h-[420px] md:h-full md:scale-150"
+                src="/fatjoe-demo-4.riv"
+                className=" w-full h-[380px] md:h-[600px] mt-5 md:mt-0"
               />
             </div>
-            <div className=" px-5 md:flex-1">
+            <div className=" px-5 md:flex-1 mt-5">
               <h1 className="font-bold font-poppins text-[34px] md:text-[42px] text-white leading-tight">
                 The #1 Blogger Outreach <br /> Service for SEOs & Agencies.
               </h1>
