@@ -49,8 +49,8 @@ export default function Home() {
           <div className="flex flex-col md:flex-row-reverse md:max-w-7xl md:w-full md:my-32">
             <div className=" md:flex-1">
               <Rive
-                src="/fatjoe-demo-4.riv"
-                className=" w-full h-[380px] md:h-[600px] mt-5 md:mt-0"
+                src="/fatjoe-demo-5.riv"
+                className=" w-full h-[380px] md:h-[600px] mt-5 md:mt-0 "
               />
             </div>
             <div className=" px-5 md:flex-1 mt-5">
