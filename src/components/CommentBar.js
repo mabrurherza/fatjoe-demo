@@ -72,7 +72,7 @@ export default function CommentBar({ section }) {
             setRawComment({ ...rawComment, comment: e.target.value })
           }
           placeholder="Write your comment here"
-          className="w-full h-32 p-2"
+          className="w-full h-32 p-2 rounded-md"
         />
         <button
           type="submit"

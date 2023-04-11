@@ -3,7 +3,6 @@ import Link from "next/link";
 import { sanityClient } from "../../../lib/sanityClient";
 
 export default function Previews({ menuList }) {
-  console.log(menuList);
   return (
     <div className="w-full m-auto max-w-md flex flex-col gap-5 mt-20">
       {menuList.map((i) => {
