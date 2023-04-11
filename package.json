@@ -12,6 +12,7 @@
     "@headlessui/react": "^1.7.13",
     "@rive-app/react-canvas": "^3.0.38",
     "@sanity/client": "^5.4.1",
+    "@sanity/image-url": "^1.0.2",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
     "firebase": "^9.19.1",
