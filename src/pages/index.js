@@ -50,7 +50,7 @@ export default function Home() {
             <div className=" md:flex-1">
               <Rive
                 src="/fatjoe-demo-5.riv"
-                className=" w-full h-[380px] md:h-[600px] mt-5 md:mt-0 "
+                className=" w-full h-[380px] md:h-[600px] mt-5 md:mt-0"
               />
             </div>
             <div className=" px-5 md:flex-1 mt-5">
