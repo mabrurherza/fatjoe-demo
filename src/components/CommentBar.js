@@ -46,16 +46,20 @@ export default function CommentBar({ section }) {
   };
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      setComment(
-        querySnapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-          created: doc.data().created?.toDate().toLocaleDateString("en-GB"),
-        }))
-      );
-      setLoading(false);
-    });
+    const unsubscribe = onSnapshot(
+      q,
+      (querySnapshot) => {
+        setComment(
+          querySnapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+            created: doc.data().created?.toDate().toLocaleDateString("en-GB"),
+          }))
+        );
+        setLoading(false);
+      },
+      [q]
+    );
 
     return unsubscribe;
   }, []);
