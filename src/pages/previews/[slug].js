@@ -1,7 +1,7 @@
 import { sanityClient } from "../../../lib/sanityClient";
-import { useState } from "react";
 import Rive, { Layout, Fit, Alignment } from "@rive-app/react-canvas";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import CommentBar from "@/components/CommentBar";
 
@@ -77,71 +77,86 @@ export default function preview({ illustration, menuList, riveFile }) {
   // console.log(riveFile[0].riveFile);
 
   return (
-    <div className="flex relative">
-      <LeftSidebar menuList={menuList} />
+    <>
+      <Head>
+        <title>{`Preview: ${illustration.name}`}</title>
+        <meta name="description" content={`Preview: ${illustration.name}`} />
+      </Head>
+      <div className="flex relative">
+        <LeftSidebar menuList={menuList} />
 
-      <div className="ml-[328px] mr-[320px] p-2 w-full">
-        <div className="bg-[#14131A] h-[720px] rounded-xl flex items-center justify-between">
-          <div className="p-14">
-            <p className="font-poppins text-lg text-white">PREVIEW</p>
-            <h1 className="text-6xl font-bold font-poppins text-white max-w-lg">
-              {illustration.name}
-            </h1>
+        <div className="ml-[328px] mr-[320px] p-2 w-full">
+          <div className="bg-[#14131A] h-[720px] rounded-xl flex items-center justify-between">
+            <div className="p-14">
+              <p className="font-poppins text-lg text-white">PREVIEW</p>
+              <h1
+                className="text-6xl font-bold font-poppins text-white max-w-lg leading-[1.2]
+"
+              >
+                {illustration.name}
+              </h1>
+            </div>
+            <div className=" m-10">
+              {riveFile[0].riveFile !== null ? (
+                <Rive
+                  src={`${riveFile[0].riveFile}`}
+                  className=" w-[520px] h-[520px]"
+                />
+              ) : (
+                <Rive src="/wip.riv" className=" w-[520px] h-[520px]" />
+              )}
+            </div>
           </div>
-          <div className=" m-10">
-            <Rive
-              // src={`/${illustration.fileRef}.riv`}
-              src={`${riveFile[0].riveFile}`}
-              className=" w-[520px] h-[520px]"
-            />
-          </div>
-        </div>
-        <div className="flex gap-2">
-          <div className="flex-1 bg-slate-100 p-4 mt-2 rounded-xl">
-            <p className="font-bold uppercase text-sm text-slate-600 mb-2">
-              Update history:
-            </p>
-            <ul>
-              {illustration.updateHistory.map((i) => {
-                return (
-                  <li key={i._key} className="flex flex-col gap-1">
-                    <p>
-                      <strong>{convertDate(i.date)}</strong> - {i.description}
-                    </p>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <div className="flex gap-2">
+            <div className="flex-1 bg-slate-100 p-4 mt-2 rounded-xl">
+              <p className="font-bold uppercase text-sm text-slate-600 mb-2">
+                Update history:
+              </p>
+              <ul>
+                {illustration.updateHistory.map((i) => {
+                  return (
+                    <li key={i._key} className="flex flex-col gap-1">
+                      <p>
+                        <strong>{convertDate(i.date)}</strong> - {i.description}
+                      </p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
 
-          <div className="bg-slate-100 flex-1 p-6 mt-2 rounded-xl w-full">
-            {riveFile[0].riveFile !== null ? (
-              <a href={`${riveFile[0].riveFile}?dl=`}>
-                <div className="bg-slate-700 w-fit h-12 px-3 flex gap-3 items-center justify-center rounded-md text-white">
+            <div className="bg-slate-100 flex-1 p-6 mt-2 rounded-xl w-full">
+              {riveFile[0].riveFile !== null ? (
+                <a href={`${riveFile[0].riveFile}?dl=`}>
+                  <div className="bg-slate-700 w-fit h-12 px-3 flex gap-3 items-center justify-center rounded-md text-white">
+                    <img
+                      src="/icon/download_active.svg"
+                      alt="download icon active"
+                      className="w-4"
+                    />
+                    <p> Download Rive animation file</p>
+                  </div>
+                </a>
+              ) : (
+                <div className="bg-slate-200  w-fit h-12 px-3 flex gap-3 items-center justify-center rounded-md">
                   <img
-                    src="/icon/download_active.svg"
+                    src="/icon/download_inactive.svg"
                     alt="download icon active"
                     className="w-4"
                   />
-                  <p> Download Rive animation file</p>
+                  <p className="text-slate-400">
+                    {" "}
+                    Rive file isn't available yet
+                  </p>
                 </div>
-              </a>
-            ) : (
-              <div className="bg-slate-200  w-fit h-12 px-3 flex gap-3 items-center justify-center rounded-md">
-                <img
-                  src="/icon/download_inactive.svg"
-                  alt="download icon active"
-                  className="w-4"
-                />
-                <p className="text-slate-400"> Rive file isn't available yet</p>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
-      <CommentBar section={illustration.slug.current} />
-    </div>
+        <CommentBar section={illustration.slug.current} />
+      </div>
+    </>
   );
 }
 
