@@ -89,10 +89,7 @@ export default function preview({ illustration, menuList, riveFile }) {
           <div className="bg-[#14131A] h-[720px] rounded-xl flex items-center justify-between">
             <div className="p-14">
               <p className="font-poppins text-lg text-white">PREVIEW</p>
-              <h1
-                className="text-6xl font-bold font-poppins text-white max-w-lg leading-[1.2]
-"
-              >
+              <h1 className="text-6xl font-bold font-poppins text-white max-w-lg leading-[1.2]">
                 {illustration.name}
               </h1>
             </div>
