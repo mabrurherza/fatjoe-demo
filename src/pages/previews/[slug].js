@@ -78,7 +78,7 @@ const LeftSidebar = ({ menuList, menuShow, toggleMenu }) => {
   );
 };
 
-export default function preview({ illustration, menuList, riveFile }) {
+export default function Preview({ illustration, menuList, riveFile }) {
   const convertDate = (inputDate) => {
     let date = new Date(inputDate);
     let options = { month: "long", day: "2-digit" };
