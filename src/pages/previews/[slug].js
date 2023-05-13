@@ -2,18 +2,30 @@ import { sanityClient } from "../../../lib/sanityClient";
 import Rive, { Layout, Fit, Alignment } from "@rive-app/react-canvas";
 import { useRouter } from "next/router";
 import Head from "next/head";
-
+import { useState } from "react";
 import CommentBar from "@/components/CommentBar";
+import classNames from "classnames";
 
-const LeftSidebar = ({ menuList }) => {
+const LeftSidebar = ({ menuList, menuShow, toggleMenu }) => {
   const router = useRouter();
   // console.log(router.asPath);
 
+  const sidebarLeftClasses = classNames(
+    "w-[80vw] md:w-[420px] fixed inset-y-0 left-0 transition-transform duration-300  ease-in-out transform bg-slate-100 p-4 rounded-r-lg drop-shadow-2xl",
+    {
+      "translate-x-0": menuShow,
+      "-translate-x-full": !menuShow,
+    }
+  );
+
   return (
-    <div className="w-[320px] fixed left-0 top-0 bg-slate-100 p-4 rounded-xl m-2">
-      <p className="font-bold uppercase text-sm text-slate-600 mb-2">
-        NAVIGATION
-      </p>
+    <div className={sidebarLeftClasses}>
+      <div className="flex justify-between items-center mb-5">
+        <p className="font-bold uppercase text-sm text-slate-600">Navigation</p>
+        <button onClick={toggleMenu} className="bg-red-100 p-2 rounded-md">
+          <img className="w-4 " src="/icon/ic-close.svg" alt="close icon" />
+        </button>
+      </div>
       <div className="pb-5 mb-1 border-b border-slate-400 flex gap-1">
         <div className="flex gap-1 items-center">
           <div className={`w-4 h-4 rounded-md bg-blue-500`}></div>
@@ -76,35 +88,70 @@ export default function preview({ illustration, menuList, riveFile }) {
 
   // console.log(riveFile[0].riveFile);
 
+  const [menuShow, setMenuShow] = useState(false);
+  const toggleMenu = () => {
+    setMenuShow(!menuShow);
+  };
+
+  const [commentShow, setCommentShow] = useState(false);
+  const toggleComment = () => {
+    setCommentShow(!commentShow);
+  };
+
   return (
     <>
       <Head>
         <title>{`Preview: ${illustration.name}`}</title>
         <meta name="description" content={`Preview: ${illustration.name}`} />
       </Head>
-      <div className="flex relative">
-        <LeftSidebar menuList={menuList} />
+      <div className="flex flex-col relative">
+        <LeftSidebar
+          menuList={menuList}
+          menuShow={menuShow}
+          toggleMenu={toggleMenu}
+        />
+        <div className="w-full m-auto max-w-[1440px]">
+          <div className="mx-2 mt-2 mb-1 h-20 flex gap-5 items-center rounded-xl">
+            <button
+              className="cursor-pointer bg-slate-100 flex gap-3 items-center p-3 rounded-md hover:bg-slate-200"
+              onClick={() => setMenuShow(!menuShow)}
+            >
+              <img src="/icon/ic-list.svg" alt="icon list" className="w-5" />
+              <p>List</p>
+            </button>
 
-        <div className="ml-[328px] mr-[320px] p-2 w-full">
-          <div className="bg-[#14131A] h-[720px] rounded-xl flex items-center justify-between">
-            <div className="p-14">
-              <p className="font-poppins text-lg text-white">PREVIEW</p>
-              <h1 className="text-6xl font-bold font-poppins text-white max-w-lg leading-[1.2]">
+            <button
+              className="cursor-pointer bg-slate-100 flex gap-3 items-center p-3 rounded-md hover:bg-slate-200"
+              onClick={() => setCommentShow(!commentShow)}
+            >
+              <img src="/icon/ic-comment.svg" alt="icon list" className="w-5" />
+              <p>Comment</p>
+            </button>
+          </div>
+        </div>
+
+        <div className="p-2 w-full max-w-[1440px] m-auto">
+          <div className="bg-[#14131A]  p-10 lg:h-[720px] rounded-xl flex flex-col md:flex-row items-center justify-start lg:justify-between">
+            <div className="p-10 lg:p-14">
+              <p className="font-poppins text-md lg:text-lg text-center lg:text-left text-white">
+                PREVIEW
+              </p>
+              <h1 className="text-4xl lg:text-6xl font-bold font-poppins text-white text-center lg:text-left max-w-lg leading-[1.2]">
                 {illustration.name}
               </h1>
             </div>
-            <div className=" m-10">
+            <div className="">
               {riveFile[0].riveFile !== null ? (
                 <Rive
                   src={`${riveFile[0].riveFile}`}
-                  className=" w-[520px] h-[520px]"
+                  className="w-[380px] h-[380px] lg:w-[520px] lg:h-[520px]"
                 />
               ) : (
                 <Rive src="/wip.riv" className=" w-[520px] h-[520px]" />
               )}
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col lg:flex-row gap-2">
             <div className="flex-1 bg-slate-100 p-4 mt-2 rounded-xl">
               <p className="font-bold uppercase text-sm text-slate-600 mb-2">
                 Update history:
@@ -151,7 +198,11 @@ export default function preview({ illustration, menuList, riveFile }) {
           </div>
         </div>
 
-        <CommentBar section={illustration.slug.current} />
+        <CommentBar
+          section={illustration.slug.current}
+          commentShow={commentShow}
+          toggleComment={toggleComment}
+        />
       </div>
     </>
   );

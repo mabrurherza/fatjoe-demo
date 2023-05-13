@@ -11,8 +11,9 @@ import {
   doc,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import classNames from "classnames";
 
-export default function CommentBar({ section }) {
+export default function CommentBar({ section, commentShow, toggleComment }) {
   const colRef = collection(db, `${section}-comment`);
   const q = query(colRef, orderBy("created", "asc"));
 
@@ -60,11 +61,23 @@ export default function CommentBar({ section }) {
     return unsubscribe;
   }, []);
 
+  const commentSidebarClasses = classNames(
+    "w-[80vw] md:w-[420px] h-[100vh] fixed inset-y-0 right-0 transition-transform duration-300  ease-in-out transform bg-slate-100 p-4 rounded-l-lg drop-shadow-2xl",
+    {
+      "-translate-x-0": commentShow,
+      "translate-x-full": !commentShow,
+    }
+  );
+
   return (
-    <div className="w-[320px] h-[100vh] bg-slate-100 p-4 fixed right-0 top-0">
-      <p className="font-bold uppercase text-sm text-slate-600 mb-2">
-        Feedback
-      </p>
+    // <div className="w-[320px]  bg-slate-100 p-4 fixed right-0 top-0">
+    <div className={commentSidebarClasses}>
+      <div className="flex justify-between items-center mb-5">
+        <p className="font-bold uppercase text-sm text-slate-600">Feedback</p>
+        <button onClick={toggleComment} className="bg-red-100 p-2 rounded-md">
+          <img className="w-4 " src="/icon/ic-close.svg" alt="close icon" />
+        </button>
+      </div>
       <form onSubmit={handleSubmit} className="mb-10">
         <textarea
           value={rawComment.comment}
