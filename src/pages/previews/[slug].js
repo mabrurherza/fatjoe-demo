@@ -144,7 +144,7 @@ export default function Preview({ illustration, menuList, riveFile }) {
               {riveFile[0].riveFile !== null ? (
                 <Rive
                   src={`${riveFile[0].riveFile}`}
-                  className="w-[380px] h-[380px] lg:w-[520px] lg:h-[520px]"
+                  className="w-[320px] h-[320px] lg:w-[520px] lg:h-[520px]"
                 />
               ) : (
                 <Rive src="/wip.riv" className=" w-[520px] h-[520px]" />
