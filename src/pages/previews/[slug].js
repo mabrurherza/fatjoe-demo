@@ -42,7 +42,7 @@ const LeftSidebar = ({ menuList, menuShow, toggleMenu }) => {
           <p className="text-sm">Final</p>
         </div>
       </div>
-      <ul className=" flex gap-2 flex-col mt-2">
+      <ul className=" flex gap-2 flex-col mt-2  overflow-auto h-[85%] scrollbar">
         {menuList.map((i) => {
           let bgColor = "";
 
