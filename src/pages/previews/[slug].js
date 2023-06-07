@@ -11,7 +11,7 @@ const LeftSidebar = ({ menuList, menuShow, toggleMenu }) => {
   // console.log(router.asPath);
 
   const sidebarLeftClasses = classNames(
-    "w-[80vw] md:w-[420px] fixed inset-y-0 left-0 transition-transform duration-300  ease-in-out transform bg-slate-100 p-4 rounded-r-lg drop-shadow-2xl",
+    "w-[80vw] md:w-[420px] z-10 fixed inset-y-0 left-0 transition-transform duration-300  ease-in-out bg-slate-100 p-4 rounded-r-lg drop-shadow-2xl",
     {
       "translate-x-0": menuShow,
       "-translate-x-full": !menuShow,
@@ -19,61 +19,71 @@ const LeftSidebar = ({ menuList, menuShow, toggleMenu }) => {
   );
 
   return (
-    <div className={sidebarLeftClasses}>
-      <div className="flex justify-between items-center mb-5">
-        <p className="font-bold uppercase text-sm text-slate-600">Navigation</p>
-        <button onClick={toggleMenu} className="bg-red-100 p-2 rounded-md">
-          <img className="w-4 " src="/icon/ic-close.svg" alt="close icon" />
-        </button>
-      </div>
-      <div className="pb-5 mb-1 border-b border-slate-400 flex gap-1">
-        <div className="flex gap-1 items-center">
-          <div className={`w-4 h-4 rounded-md bg-blue-500`}></div>
-          <p className="text-sm">WIP</p>
+    <div className="relative">
+      <div className={sidebarLeftClasses}>
+        <div className="flex justify-between items-center mb-5">
+          <p className="font-bold uppercase text-sm text-slate-600">
+            Navigation
+          </p>
+          <button onClick={toggleMenu} className="bg-red-100 p-2 rounded-md">
+            <img className="w-4 " src="/icon/ic-close.svg" alt="close icon" />
+          </button>
         </div>
-        <span className="text-slate-400">/</span>
-        <div className="flex gap-1 items-center">
-          <div className={`w-4 h-4 rounded-md bg-yellow-500`}></div>
-          <p className="text-sm">Review</p>
+        <div className="pb-5 mb-1 border-b border-slate-400 flex gap-1">
+          <div className="flex gap-1 items-center">
+            <div className={`w-4 h-4 rounded-md bg-blue-500`}></div>
+            <p className="text-sm">WIP</p>
+          </div>
+          <span className="text-slate-400">/</span>
+          <div className="flex gap-1 items-center">
+            <div className={`w-4 h-4 rounded-md bg-yellow-500`}></div>
+            <p className="text-sm">Review</p>
+          </div>
+          <span className="text-slate-400">/</span>
+          <div className="flex gap-1 items-center">
+            <div className={`w-4 h-4 rounded-md bg-green-500`}></div>
+            <p className="text-sm">Final</p>
+          </div>
         </div>
-        <span className="text-slate-400">/</span>
-        <div className="flex gap-1 items-center">
-          <div className={`w-4 h-4 rounded-md bg-green-500`}></div>
-          <p className="text-sm">Final</p>
-        </div>
-      </div>
-      <ul className=" flex gap-2 flex-col mt-2  overflow-auto h-[85%] scrollbar">
-        {menuList.map((i) => {
-          let bgColor = "";
+        <ul className=" flex gap-2 flex-col mt-2  overflow-auto h-[85%] scrollbar">
+          {menuList.map((i) => {
+            let bgColor = "";
 
-          switch (i.status) {
-            case "wip":
-              bgColor = "bg-blue-500";
-              break;
-            case "review":
-              bgColor = "bg-yellow-500";
-              break;
-            case "final":
-              bgColor = "bg-green-500";
-              break;
-          }
+            switch (i.status) {
+              case "wip":
+                bgColor = "bg-blue-500";
+                break;
+              case "review":
+                bgColor = "bg-yellow-500";
+                break;
+              case "final":
+                bgColor = "bg-green-500";
+                break;
+            }
 
-          return (
-            <a href={`/previews/${i.slug.current}`} key={i._id}>
-              <li
-                className={
-                  router.asPath === `/previews/${i.slug.current}`
-                    ? "flex gap-3 items-center h-12 p-2 rounded-md  bg-white"
-                    : "flex gap-3 items-center h-12 p-2 rounded-md hover:bg-slate-200"
-                }
-              >
-                <div className={`w-4 h-4 rounded-md ${bgColor}`}></div>
-                <p className="text-lg hover:text-slate-600">{i.name}</p>
-              </li>
-            </a>
-          );
-        })}
-      </ul>
+            return (
+              <a href={`/previews/${i.slug.current}`} key={i._id}>
+                <li
+                  className={
+                    router.asPath === `/previews/${i.slug.current}`
+                      ? "flex gap-3 items-center h-12 p-2 rounded-md  bg-white"
+                      : "flex gap-3 items-center h-12 p-2 rounded-md hover:bg-slate-200"
+                  }
+                >
+                  <div className={`w-4 h-4 rounded-md ${bgColor}`}></div>
+                  <p className="text-lg hover:text-slate-600">{i.name}</p>
+                </li>
+              </a>
+            );
+          })}
+        </ul>
+      </div>
+      {menuShow && (
+        <div
+          onClick={toggleMenu}
+          className="bg-black bg-opacity-75 z-0 fixed left-0 top-0 w-screen h-screen overflow-hidden"
+        ></div>
+      )}
     </div>
   );
 };
