@@ -69,6 +69,14 @@ export default function CommentBar({ section, commentShow, toggleComment }) {
     }
   );
 
+  const blackOpacity = classNames(
+    "z-0 fixed left-0 top-0 w-screen h-screen overflow-hidden transition-all duration-300",
+    {
+      "visible bg-black bg-opacity-75": commentShow,
+      "invisible bg-black bg-opacity-0": !commentShow,
+    }
+  );
+
   return (
     // <div className="w-[320px]  bg-slate-100 p-4 fixed right-0 top-0">
     <div className="relative">
@@ -146,12 +154,7 @@ export default function CommentBar({ section, commentShow, toggleComment }) {
           )}
         </div>
       </div>
-      {commentShow && (
-        <div
-          onClick={toggleComment}
-          className="bg-black bg-opacity-75 z-0 fixed top-0 right-0 w-screen h-screen overflow-hidden"
-        ></div>
-      )}
+      <div onClick={toggleComment} className={blackOpacity}></div>
     </div>
   );
 }

@@ -18,6 +18,14 @@ const LeftSidebar = ({ menuList, menuShow, toggleMenu }) => {
     }
   );
 
+  const blackOpacity = classNames(
+    "z-0 fixed left-0 top-0 w-screen h-screen overflow-hidden transition-all duration-300",
+    {
+      "visible bg-black bg-opacity-75": menuShow,
+      "invisible bg-black bg-opacity-0": !menuShow,
+    }
+  );
+
   return (
     <div className="relative">
       <div className={sidebarLeftClasses}>
@@ -78,12 +86,7 @@ const LeftSidebar = ({ menuList, menuShow, toggleMenu }) => {
           })}
         </ul>
       </div>
-      {menuShow && (
-        <div
-          onClick={toggleMenu}
-          className="bg-black bg-opacity-75 z-0 fixed left-0 top-0 w-screen h-screen overflow-hidden"
-        ></div>
-      )}
+      <div onClick={toggleMenu} className={blackOpacity}></div>
     </div>
   );
 };
