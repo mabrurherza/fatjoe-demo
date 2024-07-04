@@ -1,5 +1,5 @@
 import { sanityClient } from "../../../lib/sanityClient";
-import Rive, { Layout, Fit, Alignment } from "@rive-app/react-canvas";
+import Rive from "@rive-app/react-canvas";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useState } from "react";
@@ -111,6 +111,13 @@ export default function Preview({ illustration, menuList, riveFile }) {
     setCommentShow(!commentShow);
   };
 
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [placeholderImage, setPlaceholderImage] = useState("/placeholder.svg");
+
+  const handleLoad = () => {
+    setIsLoaded(true);
+  };
+
   return (
     <>
       <Head>
@@ -161,7 +168,8 @@ export default function Preview({ illustration, menuList, riveFile }) {
                 />
               ) : (
                 <Rive src="/wip.riv" className=" w-[520px] h-[520px]" />
-              )}
+              )}{" "}
+              */
             </div>
           </div>
           <div className="flex flex-col lg:flex-row gap-2">
