@@ -28,7 +28,7 @@ export default function Preview() {
                         </div>
                         <div className="">
                             <Rive
-                                src="https://res.cloudinary.com/imagestash/raw/upload/v1720087003/Personal/fatjoe-july-2024-2_lxbxiy.riv"
+                                src="/rive/fatjoe-july-2024-3.riv"
                                 className="w-[320px] h-[320px] lg:w-[520px] lg:h-[520px]"
                             />
                         </div>
